@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/todo.js"></script>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <div class="content" ng-controller="todoCtrl">
+        <h2>Todos list</h2>
+        <div class="markingAll help-block" ng-show="ifItems()">
+            <input type="checkbox" id="markAll" ng-model="markAll" ng-click="markAllItems()"/>
+            <label for="markAll">Mark All Items</label>
+        </div>
+        <ul>
+            <li ng-repeat="todo in todos track by $index" >
+                <input ng-model="todo.done" type="checkbox" id={{$index}} />
+                <label for="{{$index}}" class="done-{{todo.done}}">{{todo.title}}</label>
+            </li>
+        </ul>
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <div class="col-sm-8 col-xs-12">
+                    <input ng-model="newItem" type="text" placeholder="what to do ..." class="form-control" />
+                </div>
+                <button ng-click="addNew()" class="add-btn {{isNew()}} col-sm-4 col-xs-12">Add</button>
+            </div>
+            <div class="form-group" ng-show="ifItems()">
+                <span class="col-sm-8 col-xs-12"><strong>{{leftItems()}}</strong> of {{allItems()}} todos done</span>
+                <button ng-click="clearDone()" class="btn btn-danger {{isDone()}} col-sm-4 col-xs-12">Clear Done Todos</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
